@@ -9,7 +9,7 @@
 
 Summary: Printer Application Framework (PAPPL)
 Name: pappl
-Version: 1.0.2
+Version: 1.0.3
 Release: 1%{?dist}
 License: ASL 2.0
 Source: https://github.com/michaelrsweet/pappl/releases/download/v%{version}/pappl-%{version}.tar.gz
@@ -28,9 +28,6 @@ BuildRequires: make
 BuildRequires: pkgconfig
 BuildRequires: pam-devel
 BuildRequires: zlib-devel
-
-# Fix for tests on systems without running Avahi.
-Patch01: pappl-1.0.2-Fix-testpappl-abort-on-Linux-Issue-159.patch
 
 %description
 PAPPL is a simple C-based framework/library for developing CUPS Printer
@@ -88,6 +85,9 @@ make test
 %{_libdir}/pkgconfig/pappl.pc
 
 %changelog
+* Tue May 25 2021 Richard Lescak rlescak@redhat.com - 1.0.3-1
+- Update to version 1.0.3 (#1962959)
+
 * Tue Apr 13 2021 Richard Lescak rlescak@redhat.com - 1.0.2-2
 - Added patch to fix tests, added DSOFLAGS in build, made changes according to review.
 
