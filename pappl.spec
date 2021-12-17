@@ -9,8 +9,8 @@
 
 Summary: Printer Application Framework (PAPPL)
 Name: pappl
-Version: 1.0.3
-Release: 2%{?dist}
+Version: 1.1.0
+Release: 1%{?dist}
 License: ASL 2.0
 Source: https://github.com/michaelrsweet/pappl/releases/download/v%{version}/pappl-%{version}.tar.gz
 Url: https://www.msweet.org/pappl
@@ -57,6 +57,8 @@ This package provides the PAPPL headers and development environment.
 
 %build
 export DSOFLAGS="$DSOFLAGS -Wl,--as-needed"
+#need this to enable build with '-D_TIME_BITS=64' flag
+export CPPFLAGS="$CPPFLAGS -D_FILE_OFFSET_BITS=64"
 %configure
 %make_build
 
@@ -85,14 +87,17 @@ make test
 %{_libdir}/pkgconfig/pappl.pc
 
 %changelog
+* Fri Dec 17 2021 Richard Lescak <rlescak@redhat.com> - 1.1.0-1
+- Rebase to version 1.1.0 (#2020646)
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
-* Tue May 25 2021 Richard Lescak rlescak@redhat.com - 1.0.3-1
+* Tue May 25 2021 Richard Lescak <rlescak@redhat.com> - 1.0.3-1
 - Update to version 1.0.3 (#1962959)
 
-* Tue Apr 13 2021 Richard Lescak rlescak@redhat.com - 1.0.2-2
+* Tue Apr 13 2021 Richard Lescak <rlescak@redhat.com> - 1.0.2-2
 - Added patch to fix tests, added DSOFLAGS in build, made changes according to review.
 
-* Fri Mar 26 2021 Richard Lescak rlescak@redhat.com - 1.0.2-1
+* Fri Mar 26 2021 Richard Lescak <rlescak@redhat.com> - 1.0.2-1
 - Initial version of package
