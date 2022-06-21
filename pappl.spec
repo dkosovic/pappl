@@ -10,7 +10,7 @@
 Summary: Printer Application Framework (PAPPL)
 Name: pappl
 Version: 1.2.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: ASL 2.0
 Source: https://github.com/michaelrsweet/pappl/releases/download/v%{version}/pappl-%{version}.tar.gz
 Url: https://www.msweet.org/pappl
@@ -56,7 +56,7 @@ This package provides the PAPPL headers and development environment.
 %autosetup -S git
 
 %build
-export DSOFLAGS="$DSOFLAGS -Wl,--as-needed"
+export DSOFLAGS="$DSOFLAGS -Wl,-z,now,--as-needed"
 #need this to enable build with '-D_TIME_BITS=64' flag
 export CPPFLAGS="$CPPFLAGS -D_FILE_OFFSET_BITS=64"
 %configure
@@ -87,6 +87,9 @@ make test
 %{_libdir}/pkgconfig/pappl.pc
 
 %changelog
+* Tue Jun 21 2022 Richard Lescak <rlescak@redhat.com> - 1.2.1-2
+- link libpappl with -Wl,-z,now 
+
 * Tue Jun 21 2022 Richard Lescak <rlescak@redhat.com> - 1.2.1-1
 - Rebase to version 1.2.1 (#2078148)
 
